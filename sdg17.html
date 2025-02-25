@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Υπολογισμός SDG17</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Υπολογισμός Δεικτών SDG17</h1>
+
+    <!-- Φόρμα για τον Δείκτη I30 -->
+    <div>
+      <h3>Δείκτης I30</h3>
+      <label for="ref-publications"
+        >Αριθμός δημοσιεύσεων (Έτος Αναφοράς):</label
+      >
+      <input
+        type="number"
+        id="ref-publications"
+        placeholder="Εισάγετε τις δημοσιεύσεις"
+        required
+      />
+
+      <label for="ref-staff"
+        >Αριθμός ακαδημαϊκού προσωπικού (Έτος Αναφοράς):</label
+      >
+      <input
+        type="number"
+        id="ref-staff"
+        placeholder="Εισάγετε τον πληθυσμό"
+        required
+      />
+
+      <label for="eval-publications"
+        >Αριθμός δημοσιεύσεων (Έτος Αξιολόγησης):</label
+      >
+      <input
+        type="number"
+        id="eval-publications"
+        placeholder="Εισάγετε τα κιλά"
+        required
+      />
+
+      <label for="eval-staff"
+        >Αριθμός ακαδημαϊκού προσωπικού (Έτος Αξιολόγησης):</label
+      >
+      <input
+        type="number"
+        id="eval-staff"
+        placeholder="Εισάγετε τον πληθυσμό"
+        required
+      />
+    </div>
+
+    <!-- Φόρμα για το Ι31 -->
+    <div>
+      <h3>Δείκτης I31</h3>
+      <label for="i31-val1">Τιμή 1:</label>
+      <select id="i31-val1">
+        <option value="0">0</option>
+        <option value="0.25">0.25</option>
+        <option value="1">1</option>
+      </select>
+
+      <label for="i31-val2">Τιμή 2:</label>
+      <select id="i31-val2">
+        <option value="0">0</option>
+        <option value="1">1</option>
+      </select>
+
+      <label for="i31-val3">Τιμή 3:</label>
+      <select id="i31-val3">
+        <option value="0">0</option>
+        <option value="1">1</option>
+      </select>
+    </div>
+
+    <!-- Φόρμα για το Ι32 -->
+    <div>
+      <h3>Δείκτης I32</h3>
+      <label for="i32-val1">Τιμή 1:</label>
+      <select id="i32-val1">
+        <option value="0">0</option>
+        <option value="0.25">0.25</option>
+        <option value="1">1</option>
+      </select>
+
+      <label for="i32-val2">Τιμή 2:</label>
+      <select id="i32-val2">
+        <option value="0">0</option>
+        <option value="1">1</option>
+      </select>
+
+      <label for="i32-val3">Τιμή 3:</label>
+      <select id="i32-val3">
+        <option value="0">0</option>
+        <option value="1">1</option>
+      </select>
+    </div>
+
+    <!-- Φόρμα για το Ι33 -->
+    <div>
+      <h3>Δείκτης I33</h3>
+      <label for="i33-val1">Τιμή 1:</label>
+      <select id="i33-val1">
+        <option value="0">0</option>
+        <option value="1">1</option>
+      </select>
+
+      <label for="i33-val2">Τιμή 2:</label>
+      <select id="i33-val2">
+        <option value="0">0</option>
+        <option value="1">1</option>
+      </select>
+
+      <label for="i33-val3">Τιμή 3:</label>
+      <select id="i33-val3">
+        <option value="0">0</option>
+        <option value="1">1</option>
+      </select>
+    </div>
+
+    <!-- Φόρμα για το Ι34 -->
+    <div>
+      <h3>Δείκτης I34</h3>
+      <label for="i34-val1">Τιμή 1:</label>
+      <select id="i34-val1">
+        <option value="0">0</option>
+        <option value="1">1</option>
+      </select>
+
+      <label for="i34-val2">Τιμή 2:</label>
+      <select id="i34-val2">
+        <option value="0">0</option>
+        <option value="1">1</option>
+      </select>
+
+      <label for="i34-val3">Τιμή 3:</label>
+      <select id="i34-val3">
+        <option value="0">0</option>
+        <option value="1">1</option>
+      </select>
+    </div>
+
+    <!-- Κουμπί Υπολογισμού -->
+    <button id="calculate-button" onclick="calculateResults()">
+      Υπολόγισε
+    </button>
+
+    <!-- Εμφάνιση Αποτελεσμάτων -->
+    <h2>Αποτελέσματα</h2>
+    <p id="result-i30">Σταθμισμένο I30: -</p>
+    <p id="result-i31">Συνολικό I31 (πριν τον πολλαπλασιασμό): -</p>
+    <p id="result-weighted-i31">Σταθμισμένο I31: -</p>
+    <p id="feedbackI31"></p>
+    <p id="result-i32">Συνολικό I32 (πριν τον πολλαπλασιασμό): -</p>
+    <p id="result-weighted-i32">Σταθμισμένο I32: -</p>
+    <p id="feedbackI32"></p>
+    <p id="result-i33">Συνολικό I33 (πριν τον πολλαπλασιασμό): -</p>
+    <p id="result-weighted-i33">Σταθμισμένο I33: -</p>
+    <p id="feedbackI33"></p>
+    <p id="result-i34">Συνολικό I34 (πριν τον πολλαπλασιασμό): -</p>
+    <p id="result-weighted-i34">Σταθμισμένο I34: -</p>
+    <p id="feedbackI34"></p>
+    <p id="result-SDG17">SDG17: -</p>
+
+    <!-- Κουμπί για μετάβαση στη σελίδα SDG12 -->
+    <br /><br />
+    <button id="next-button" onclick="navigateTofinal()" disabled>
+      Μετάβαση στα τελικά αποτελέσματα
+    </button>
+
+    <script>
+      // Υπολογισμός αποτελεσμάτων
+      function calculateResults() {
+        const weightI30 = 0.241;
+        const weightI31 = 0.332;
+        const weightI32 = 0.18;
+        const weightI33 = 0.114;
+        const weightI34 = 0.143;
+
+        // Εισαγωγή δεδομένων για I30
+        const refPublications = parseFloat(
+          document.getElementById("ref-publications").value
+        );
+        const refStaff = parseFloat(document.getElementById("ref-staff").value);
+        const evalPublications = parseFloat(
+          document.getElementById("eval-publications").value
+        );
+        const evalStaff = parseFloat(
+          document.getElementById("eval-staff").value
+        );
+
+        if (
+          isNaN(refPublications) ||
+          isNaN(refStaff) ||
+          isNaN(evalPublications) ||
+          isNaN(evalStaff) ||
+          refStaff <= 0 ||
+          evalStaff <= 0
+        ) {
+          alert(
+            "Παρακαλώ εισάγετε έγκυρες αριθμητικές τιμές για όλα τα πεδία του I30."
+          );
+          return;
+        }
+
+        const refPerCapita = refPublications / refStaff;
+        const evalPerCapita = evalPublications / evalStaff;
+        const ratio = evalPerCapita / refPerCapita;
+
+        const resultElement = document.getElementById("result-i30");
+        let totalI30;
+        if (ratio < 1) {
+          totalI30 = 0;
+        } else {
+          totalI30 = weightI30 * ratio;
+        }
+
+        resultElement.textContent = `Σταθμισμένο I30: ${totalI30.toFixed(3)}`;
+
+        const i31Val1 = parseFloat(document.getElementById("i31-val1").value);
+        const i31Val2 = parseFloat(document.getElementById("i31-val2").value);
+        const i31Val3 = parseFloat(document.getElementById("i31-val3").value);
+
+        const i32Val1 = parseFloat(document.getElementById("i32-val1").value);
+        const i32Val2 = parseFloat(document.getElementById("i32-val2").value);
+        const i32Val3 = parseFloat(document.getElementById("i32-val3").value);
+
+        const i33Val1 = parseFloat(document.getElementById("i33-val1").value);
+        const i33Val2 = parseFloat(document.getElementById("i33-val2").value);
+        const i33Val3 = parseFloat(document.getElementById("i33-val3").value);
+
+        const i34Val1 = parseFloat(document.getElementById("i34-val1").value);
+        const i34Val2 = parseFloat(document.getElementById("i34-val2").value);
+        const i34Val3 = parseFloat(document.getElementById("i34-val3").value);
+
+        const totalI31 = i31Val1 + i31Val2 + i31Val3;
+        const weightedI31 = totalI31 * weightI31;
+        const totalI32 = i32Val1 + i32Val2 + i32Val3;
+        const weightedI32 = totalI32 * weightI32;
+        const totalI33 = i33Val1 + i33Val2 + i33Val3;
+        const weightedI33 = totalI33 * weightI33;
+        const totalI34 = i34Val1 + i34Val2 + i34Val3;
+        const weightedI34 = totalI34 * weightI34;
+        const totalSDG17 =
+          totalI30 + weightedI31 + weightedI32 + weightedI33 + weightedI34;
+
+        document.getElementById(
+          "result-i31"
+        ).textContent = `Συνολικό I31 (πριν τον πολλαπλασιασμό): ${totalI31.toFixed(
+          3
+        )}`;
+        document.getElementById(
+          "result-weighted-i31"
+        ).textContent = `Σταθμισμένο I31: ${weightedI31.toFixed(3)}`;
+        document.getElementById(
+          "result-i32"
+        ).textContent = `Συνολικό I32 (πριν τον πολλαπλασιασμό): ${totalI32.toFixed(
+          3
+        )}`;
+        document.getElementById(
+          "result-weighted-i32"
+        ).textContent = `Σταθμισμένο I32: ${weightedI32.toFixed(3)}`;
+        document.getElementById(
+          "result-i33"
+        ).textContent = `Συνολικό I33 (πριν τον πολλαπλασιασμό): ${totalI33.toFixed(
+          3
+        )}`;
+        document.getElementById(
+          "result-weighted-i33"
+        ).textContent = `Σταθμισμένο I3: ${weightedI33.toFixed(3)}`;
+        document.getElementById(
+          "result-i34"
+        ).textContent = `Συνολικό I34 (πριν τον πολλαπλασιασμό): ${totalI34.toFixed(
+          3
+        )}`;
+        document.getElementById(
+          "result-weighted-i34"
+        ).textContent = `Σταθμισμένο I34: ${weightedI34.toFixed(3)}`;
+        document.getElementById(
+          "result-SDG17"
+        ).textContent = `SDG17: ${totalSDG17.toFixed(3)}`;
+
+        // Ανατροφοδότηση για I31
+        const feedbackI31 = document.getElementById("feedbackI31");
+        if (totalI31 < 2.25) {
+          feedbackI31.textContent = "More things can be done";
+          feedbackI31.className = "low-performance";
+        } else {
+          feedbackI31.textContent = "Good performance!";
+          feedbackI31.className = "good-performance";
+        }
+
+        // Ανατροφοδότηση για I32
+        const feedbackI32 = document.getElementById("feedbackI32");
+        if (totalI32 < 2.25) {
+          feedbackI32.textContent = "More things can be done";
+          feedbackI32.className = "low-performance";
+        } else {
+          feedbackI32.textContent = "Good performance!";
+          feedbackI32.className = "good-performance";
+        }
+
+        // Ανατροφοδότηση για I33
+        const feedbackI33 = document.getElementById("feedbackI33");
+        if (totalI33 < 2) {
+          feedbackI33.textContent = "More things can be done";
+          feedbackI33.className = "low-performance";
+        } else {
+          feedbackI33.textContent = "Good performance!";
+          feedbackI33.className = "good-performance";
+        }
+
+        // Ανατροφοδότηση για I34
+        const feedbackI34 = document.getElementById("feedbackI34");
+        if (totalI34 < 2) {
+          feedbackI34.textContent = "More things can be done";
+          feedbackI34.className = "low-performance";
+        } else {
+          feedbackI34.textContent = "Good performance!";
+          feedbackI34.className = "good-performance";
+        }
+
+        localStorage.setItem("I30", totalI30);
+        localStorage.setItem("I31", weightedI31);
+        localStorage.setItem("I32", weightedI32);
+        localStorage.setItem("I33", weightedI33);
+        localStorage.setItem("I34", weightedI34);
+
+        // Ενεργοποίηση κουμπιού επόμενης σελίδας
+        document.getElementById("next-button").disabled = false;
+      }
+
+      // Μετάβαση στη σελίδα final
+      function navigateTofinal() {
+        window.location.href = "final.html";
+      }
+    </script>
+  </body>
+</html>

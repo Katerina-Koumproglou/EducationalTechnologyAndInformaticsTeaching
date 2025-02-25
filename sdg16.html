@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Υπολογισμός SDG16</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Υπολογισμός Δεικτών SDG16</h1>
+
+    <!-- Φόρμα για το Ι29 -->
+    <div>
+      <h3>Δείκτης I29</h3>
+      <label for="i29-val1">Τιμή 1:</label>
+      <select id="i29-val1">
+        <option value="0">0</option>
+        <option value="1">1</option>
+      </select>
+
+      <label for="i29-val2">Τιμή 2:</label>
+      <select id="i29-val2">
+        <option value="0">0</option>
+        <option value="1">1</option>
+      </select>
+
+      <label for="i29-val3">Τιμή 3:</label>
+      <select id="i29-val3">
+        <option value="0">0</option>
+        <option value="1">1</option>
+      </select>
+    </div>
+
+    <!-- Κουμπί Υπολογισμού -->
+    <button id="calculate-button" onclick="calculateResults()">
+      Υπολόγισε
+    </button>
+
+    <!-- Εμφάνιση Αποτελεσμάτων -->
+    <h2>Αποτελέσματα</h2>
+    <p id="result-i29">Συνολικό I29 (πριν τον πολλαπλασιασμό): -</p>
+    <p id="result-weighted-i29">Σταθμισμένο I29: -</p>
+    <p id="feedbackI29"></p>
+    <p id="result-SDG16">SDG16: -</p>
+
+    <!-- Κουμπί για μετάβαση στη σελίδα SDG17 -->
+    <br /><br />
+    <button id="next-button" onclick="navigateToSDG17()" disabled>
+      Μετάβαση στο SDG17
+    </button>
+
+    <script>
+      // Υπολογισμός αποτελεσμάτων
+      function calculateResults() {
+        const weightI29 = 1;
+
+        const i29Val1 = parseFloat(document.getElementById("i29-val1").value);
+        const i29Val2 = parseFloat(document.getElementById("i29-val2").value);
+        const i29Val3 = parseFloat(document.getElementById("i29-val3").value);
+
+        const totalI29 = i29Val1 + i29Val2 + i29Val3;
+        const weightedI29 = totalI29 * weightI29;
+        const totalSDG16 = totalI29;
+
+        document.getElementById(
+          "result-i29"
+        ).textContent = `Συνολικό I29 (πριν τον πολλαπλασιασμό): ${totalI29.toFixed(
+          3
+        )}`;
+        document.getElementById(
+          "result-weighted-i29"
+        ).textContent = `Σταθμισμένο I29: ${weightedI29.toFixed(3)}`;
+        document.getElementById(
+          "result-SDG16"
+        ).textContent = `SDG16: ${totalSDG16.toFixed(3)}`;
+
+        // Ανατροφοδότηση για I29
+        const feedbackI29 = document.getElementById("feedbackI29");
+        if (totalI29 < 2) {
+          feedbackI29.textContent = "More things can be done";
+          feedbackI29.className = "low-performance";
+        } else {
+          feedbackI29.textContent = "Good performance!";
+          feedbackI29.className = "good-performance";
+        }
+
+        localStorage.setItem("I29", weightedI29);
+
+        // Ενεργοποίηση κουμπιού επόμενης σελίδας
+        document.getElementById("next-button").disabled = false;
+      }
+
+      // Μετάβαση στη σελίδα SDG17
+      function navigateToSDG17() {
+        window.location.href = "sdg17.html";
+      }
+    </script>
+  </body>
+</html>

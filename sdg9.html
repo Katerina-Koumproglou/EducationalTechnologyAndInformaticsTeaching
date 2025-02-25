@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Υπολογισμός SDG9</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Υπολογισμός Δεικτών SDG9</h1>
+
+    <!-- Φόρμα για τον Δείκτη I18 -->
+    <div>
+      <h3>Δείκτης I18</h3>
+      <label for="ref-income">Έσοδα έρευνας (Έτος Αναφοράς):</label>
+      <input
+        type="number"
+        id="ref-income"
+        placeholder="Εισάγετε τα έσοδα"
+        required
+      />
+
+      <label for="ref-number"
+        >Αριθμός ακαδημαϊκού προσωπικού (Έτος Αναφοράς):</label
+      >
+      <input
+        type="number"
+        id="ref-number"
+        placeholder="Εισάγετε τον αριθμό"
+        required
+      />
+
+      <label for="eval-income">Έσοδα έρευνας (Έτος Αξιολόγησης):</label>
+      <input
+        type="number"
+        id="eval-income"
+        placeholder="Εισάγετε τα έσοδα"
+        required
+      />
+
+      <label for="eval-number"
+        >Αριθμός ακαδημαϊκού προσωπικού (Έτος Αξιολόγησης):</label
+      >
+      <input
+        type="number"
+        id="eval-number"
+        placeholder="Εισάγετε τον αριθμό"
+        required
+      />
+    </div>
+
+    <!-- Κουμπί Υπολογισμού -->
+    <button id="calculate-button" onclick="calculateResults()">
+      Υπολόγισε
+    </button>
+
+    <!-- Εμφάνιση Αποτελεσμάτων -->
+    <h2>Αποτελέσματα</h2>
+    <p id="result-i18">Σταθμισμένο I18: -</p>
+    <p id="result-SDG9">SDG9: -</p>
+
+    <!-- Κουμπί για μετάβαση στη σελίδα SDG10 -->
+    <br /><br />
+    <button id="next-button" onclick="navigateToSDG10()" disabled>
+      Μετάβαση στο SDG10
+    </button>
+
+    <script>
+      function calculateResults() {
+        const weightI18 = 1;
+        // Εισαγωγή δεδομένων για I18
+        const refIncome = parseFloat(
+          document.getElementById("ref-income").value
+        );
+        const refNumber = parseFloat(
+          document.getElementById("ref-number").value
+        );
+        const evalIncome = parseFloat(
+          document.getElementById("eval-income").value
+        );
+        const evalNumber = parseFloat(
+          document.getElementById("eval-number").value
+        );
+
+        if (
+          isNaN(refIncome) ||
+          isNaN(refNumber) ||
+          isNaN(evalIncome) ||
+          isNaN(evalNumber) ||
+          refNumber <= 0 ||
+          evalNumber <= 0
+        ) {
+          alert(
+            "Παρακαλώ εισάγετε έγκυρες αριθμητικές τιμές για όλα τα πεδία του I18."
+          );
+          return;
+        }
+
+        const refPerCapita = refIncome / refNumber;
+        const evalPerCapita = evalIncome / evalNumber;
+        const ratio = evalPerCapita / refPerCapita;
+
+        const resultElement = document.getElementById("result-i18");
+        let totalI18;
+        if (ratio < 1) {
+          totalI18 = 0;
+        } else {
+          totalI18 = weightI18 * ratio;
+        }
+
+        const totalSDG9 = totalI18;
+
+        resultElement.textContent = `Σταθμισμένο I18: ${totalI18.toFixed(3)}`;
+        document.getElementById(
+          "result-SDG9"
+        ).textContent = `SDG9: ${totalSDG9.toFixed(3)}`;
+
+        localStorage.setItem("I18", totalI18);
+
+        // Ενεργοποίηση κουμπιού επόμενης σελίδας
+        document.getElementById("next-button").disabled = false;
+      }
+
+      // Μετάβαση στη σελίδα SDG2
+      function navigateToSDG10() {
+        window.location.href = "sdg10.html";
+      }
+    </script>
+  </body>
+</html>
